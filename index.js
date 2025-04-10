@@ -43,7 +43,7 @@ app.post("/add", async (req, res) => {
     return res.redirect("/?error=empty");
   }
   try {
-    const check = await db.query("SELECT * FROM items WHERE title = $1", [item.lowerCase()]);
+    const check = await db.query("SELECT * FROM items WHERE LOWER(title) = $1", [item.toLowerCase()]);
     if (check.rows.length > 0) {
       console.log("Item already exists");
       return res.redirect("/?error=duplicate");
